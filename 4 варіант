@@ -1,0 +1,74 @@
+#include <iostream>
+ 
+using namespace std;
+ 
+class cArray     //клас массив
+{
+private:
+    int *arr;// массив
+    int n; //размер массива
+    int m; //начало отчета массива
+public:
+    cArray(int k)         //конструктор стандартный
+    {
+        m = 0;                //считаем с 0
+        arr = new int[k];   //выделили память
+        n = k;                 //запомнили размер
+        for (int i = 0; i <= n; i++)
+            arr[i] = rand() % 23;    //заполнили числами
+    }
+    cArray(int a, int b)    //  конструктор с возможность задания произвольных границ индексов
+    {
+        m = a;               //считаем с a
+        arr = new int[b - a]; //выделили память
+        n = b - a;              //запомнили размер
+        for (int i = 0; i <= n; i++)
+            arr[i] = rand() % 44;    //заполнили числами
+    }
+ 
+ 
+    int& operator[] (int k)   //оператор [] - обращение к отдельному элементу массива
+    {
+        if (k<m || k>n + m)       //если указан индекс меньше нижней границы или больше размера
+        {
+            return arr[0];
+        }
+        return arr[k - m];   //если указан верный индекс, возвращаем значение элемента
+    }
+ 
+   void cArray::Print(int k1, int k2) ;  //процедура вывода чисел с индексами k1..k2 на экран
+    {
+        for (int i = 0; i <= k2 - k1; i++)    //цикл по таким числам
+    }
+    cArray operator+ (cArray b)     //оператор + - сложение массивов по одинаковым границам
+    {
+        cArray temp(n);            //создали новый массив размером n
+        for (int i = 0; i <= n; i++)      //цикл по массиву
+            temp[i] = arr[i] + b[i];   //заполняем новый массив как сумму массивов
+        return temp;               //возвращаем массив сумм
+    }
+    cArray operator- (cArray b)   // - аналогично
+    {
+        cArray temp(n);
+        for (int i = m; i <= n; i++)
+            temp[i] = arr[i] - b[i];
+        return temp;
+    }
+    cArray operator * (int z)     //аналогично умножение на число
+    {
+        cArray temp(n);
+        for (int i = 0; i <= n; i++)
+            temp[i] = arr[i] * z;
+        return temp;
+    }
+    ~cArray()                 //деструктор
+    {
+        delete[] arr;
+    }
+};
+ 
+int main()
+{
+          
+ 
+}
